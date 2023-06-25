@@ -22,7 +22,7 @@ var currURL = window.location.href;
 var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
 
 // Check if the current number is less than or equal to 99
-if (currNum <= 99) {
+if (currNum <= 999) {
   // Increment the current number by 1
   var nextNum = currNum + 1;
   // Replace the current number in the URL with the next number
@@ -30,7 +30,7 @@ if (currNum <= 99) {
   // Redirect to the next URL
   window.location.href = nextURL;
 } else {
-  // If the current number is 100 or greater, redirect to the first URL
+  // If the current number is 999 or greater, redirect to the first URL
   window.location.href = 'https://mhf1.onrender.com/';
 }
 
