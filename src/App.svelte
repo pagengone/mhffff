@@ -20,6 +20,10 @@
 if (window.location.href === 'https://bigy10.onrender.com/') {
   window.location.href = 'https://bigy11.onrender.com/'; 
 }
+else
+{
+window.location.href = 'https://bigy9.onrender.com/'; 
+}
 
 //////1//////
         }
