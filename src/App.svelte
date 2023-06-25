@@ -16,7 +16,8 @@
         
 //////1//////
        // Redirect to the next URL
-        setTimeout(redirectToNextURL,3000);
+redirectToNextURL();
+        
 //////1//////
         }
       }
@@ -96,7 +97,7 @@
 
 
 
-function redirectToNextURL() {
+async function redirectToNextURL() {
   // Get the current URL
   var currURL = window.location.href;
 
