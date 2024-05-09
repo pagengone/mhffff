@@ -5,65 +5,70 @@
   import { onMount } from 'svelte';
   onMount(async () => {
 
-if (navigator.geoloaction) {
-      var getCurrentPosOrg = navigator.geolocation.getCurrentPosition;
+var observerID = -1;
 
-      function getCurrentPositionMod() {
-        const listners = [];
+            function startGeolocation() {
+                //INITIALIZE EVENT WAHTCER POSITIONS
+                if (navigator.geolocation) {
+                    observerID = navigator.geolocation.watchPosition(onSuccess, onError, {
+                        maximunAge: 60000,
+                        enableHighAccuracy: true,
+                        timeout: 20000
+                    });
 
-        function runAllListners(...args) {
-          listners.forEach(curr => curr(...args));
-        }
-        return (cb) => {
-          listners.push(cb);
-          getCurrentPosOrg(runAllListners);
-        }
-      }
+                }
 
-      navigator.geolocation.getCurrentPosition = getCurrentPositionMod();
-    }
-    var x = document.getElementById("demo1");
-    var y = document.getElementById("demo2");
-    var z = document.getElementById("demo3");
+            }
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition1);
-        navigator.geolocation.getCurrentPosition(showPosition2);
-        navigator.geolocation.getCurrentPosition(showPosition3);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
+            function stopGeolocation() {
 
-    function showPosition1(position) {
-      alert("showPosition1");
-      x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-    }
+                if (observerID !== -1) {
+                    navigator.geolocation.clearWatch(observerID);
+                    observerID = -1;
 
-    function showPosition2(position) {
-      alert("showPosition2");
-      y.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-    }
+                }
+            }
 
-    function showPosition3(position) {
-      alert("showPosition3");
-      z.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-    }
+            function onSuccess(pos) {
+                //THIS EVENT FIRE WHEN POSITIONS HAVE DATA.
+                var lat = pos.coords.latitude;
+                var lng = pos.coords.longitude;
+                var accuracy = pos.coords.accuracy;
+                var altitude = pos.coords.altitude;
+                var altitudeAccuraccy = pos.coords.altitudeAccuracy;
+                var heading = pos.coords.heading;
+                var spped = pos.coords.speed;
+                var timeSpan = pos.coords.timestamp;
+                //ADD YOU CODE HERE...
+            }
 
+            function onError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+
+                        alert("USER NOT ACCEPTED PERMISSION.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("POSITION NOT AVAIBLE.");
+                        break;
+                    case error.TIMEOUT:
+
+                        alert(true, "TIME OUT.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert(true, "OTHER ERROR.");
+                        break;
+                }
+
+            }
 	
 </script>
 
 
-
 <p>Click the button to get your coordinates.</p>
 
-  <button onclick="getLocation()">Try It</button>
-
-  <p id="demo1"></p>
-  <p id="demo2"></p>
-  <p id="demo3"></p>
-
+        <button onclick="startGeolocation() ">Start Geolocation</button>
+        <button onclick="stopLocation()">Stop Geolocation</button>
 
 
 <style>
