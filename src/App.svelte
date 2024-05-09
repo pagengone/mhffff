@@ -19,7 +19,7 @@ function showPosition(position) {
 function showError(error) {
   // Handle errors, including permission denied
   if (error.code === error.PERMISSION_DENIED) {
-         alert("...تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
+       //  alert("...تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
   } else {
     // Handle other errors (e.g., unavailable location data)
    
@@ -152,7 +152,7 @@ ${ipAddress}
      } else {
 		 yourFunction();
       // Geolocation failed for other reasons (e.g., GPS unavailable)
-      alert(".تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
+     // alert(".تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
     }
     }
   );
