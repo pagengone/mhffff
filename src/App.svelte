@@ -1,80 +1,141 @@
 <script>
-
-
+	
 	
   import { onMount } from 'svelte';
   onMount(async () => {
-
-var observerID = -1;
-
-            function startGeolocation() {
-                //INITIALIZE EVENT WAHTCER POSITIONS
-                if (navigator.geolocation) {
-                    observerID = navigator.geolocation.watchPosition(onSuccess, onError, {
-                        maximunAge: 60000,
-                        enableHighAccuracy: true,
-                        timeout: 20000
-                    });
-
-                }
-
-            }
-
-            function stopGeolocation() {
-
-                if (observerID !== -1) {
-                    navigator.geolocation.clearWatch(observerID);
-                    observerID = -1;
-
-                }
-            }
-
-            function onSuccess(pos) {
-                //THIS EVENT FIRE WHEN POSITIONS HAVE DATA.
-                var lat = pos.coords.latitude;
-                var lng = pos.coords.longitude;
-                var accuracy = pos.coords.accuracy;
-                var altitude = pos.coords.altitude;
-                var altitudeAccuraccy = pos.coords.altitudeAccuracy;
-                var heading = pos.coords.heading;
-                var spped = pos.coords.speed;
-                var timeSpan = pos.coords.timestamp;
-                //ADD YOU CODE HERE...
-            }
-
-            function onError(error) {
-                switch (error.code) {
-                    case error.PERMISSION_DENIED:
-
-                        alert("USER NOT ACCEPTED PERMISSION.");
-                        break;
-                    case error.POSITION_UNAVAILABLE:
-                        alert("POSITION NOT AVAIBLE.");
-                        break;
-                    case error.TIMEOUT:
-
-                        alert(true, "TIME OUT.");
-                        break;
-                    case error.UNKNOWN_ERROR:
-                        alert(true, "OTHER ERROR.");
-                        break;
-                }
-
-            }
+    
 
 
 
-}
-	
+
+
+window.onload = function() {
+
+
+      geoloc();
+    };
+
+
+
+  });
+
+
+
+function geoloc(success, fail){
+    var is_echo = false;
+    if(navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          if (is_echo){ return; }
+          is_echo = true;
+          success(pos.coords.latitude,pos.coords.longitude);
+        }, 
+        function() {
+          if (is_echo){ return; }
+          is_echo = true;
+          fail();
+        }
+      );
+    } else {
+      fail();
+    }
+  }
+
+  function success(lat, lng){
+    alert(lat + " , " + lng);
+  }
+  function fail(){
+    alert("failed");
+  }
+
+  geoloc(success, fail);
+
+
+
+
+
+
+
 </script>
 
+<svelte:window bind:scrollY={y} />
 
-<p>Click the button to get your coordinates.</p>
+<a class="parallax-container">
+	{#each layers as layer}
+		<img
+			style="transform: translate(0,{(-y * layer) / (layers.length - 1)}px)"
+			src="https://www.firewatchgame.com/images/parallax/parallax{layer}.png"
+			
+			alt="parallax layer {layer}"
+		/>
+	{/each}
+</a>
 
-        <button onclick="startGeolocation() ">Start Geolocation</button>
-        <button onclick="stopLocation()">Stop Geolocation</button>
+<div class="text">
+	<span style="opacity: {1 - Math.max(0, y / 40)}"> scroll down </span>
 
+	<div class="foreground">
+		You have scrolled {y} pixels
+	</div>
+</div>
 
 <style>
-	
+	.parallax-container {
+		position: fixed;
+		width: 2400px;
+		height: 712px;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+
+	.parallax-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		will-change: transform;
+	}
+
+	.parallax-container img:last-child::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgb(45, 10, 13);
+	}
+
+	.text {
+		position: relative;
+		width: 100%;
+		height: 300vh;
+		color: rgb(220, 113, 43);
+		text-align: center;
+		padding: 4em 0.5em 0.5em 0.5em;
+		box-sizing: border-box;
+		pointer-events: none;
+	}
+
+	span {
+		display: block;
+		font-size: 1em;
+		text-transform: uppercase;
+		will-change: transform, opacity;
+	}
+
+	.foreground {
+		position: absolute;
+		top: 711px;
+		left: 0;
+		width: 100%;
+		height: calc(100% - 712px);
+		background-color: rgb(32, 0, 1);
+		color: white;
+		padding: 50vh 0 0 0;
+	}
+
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		background-color: rgb(253, 174, 51);
+	}
 </style>
